@@ -20,6 +20,9 @@
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
+    {{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'swiper-init.js' | asset_url | script_tag }}
     <script src="{{ 'swiper.min.js' | asset_url }}"></script>
+    <script src="{{ 'swiper-init.js' | asset_url }}"></script>
   </body>
 </html>

@@ -5,6 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
+{% comment %}
 <div class="product-images">
   {% for image in product.images %}
     {% render 'image', class: 'product-image', image: image %}
@@ -40,6 +41,13 @@
     {{ form | payment_button }}
   {% endform %}
 </div>
+{% endcomment %}
+
+
+{% section 'swiper-gallery' %}
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'swiper-init.js' | asset_url | script_tag }}
 
 {% schema %}
 {
@@ -50,3 +58,4 @@
   }
 }
 {% endschema %}
+
