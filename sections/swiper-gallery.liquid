@@ -1,19 +1,99 @@
-<div class="swiper-container">
+
+  <div class="swiper">
   <div class="swiper-wrapper">
-    {% for image in product.images %}
+    <div class="swiper-slide">
+  {% if section.settings.slide_1 %}
+    <img src="{{ section.settings.slide_1 | image_url: width: 350 }}" alt="Slide 1" />
+  {% else %}
+    Slide 1
+  {% endif %}
+</div>
+   <div class="swiper-slide">
+  {% if section.settings.slide_2 %}
+    <img src="{{ section.settings.slide_2 | image_url: width: 350 }}" alt="Slide 2" />
+  {% else %}
+    Slide 2
+  {% endif %}
+</div>
+    <div class="swiper-slide">
+  {% if section.settings.slide_3 %}
+    <img src="{{ section.settings.slide_3 | image_url: width: 350 }}" alt="Slide 3" />
+  {% else %}
+    Slide 3
+  {% endif %}
+</div>
       <div class="swiper-slide">
-        <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}">
-      </div>
-    {% endfor %}
+  {% if section.settings.slide_4 %}
+    <img src="{{ section.settings.slide_4 | image_url: width: 350 }}" alt="Slide 4" />
+  {% else %}
+    Slide 4
+  {% endif %}
+</div>
+    <div class="swiper-slide">
+  {% if section.settings.slide_5 %}
+    <img src="{{ section.settings.slide_5 | image_url: width: 350 }}" alt="Slide 5" />
+  {% else %}
+    Slide 5
+  {% endif %}
+</div>
+   <div class="swiper-slide">
+  {% if section.settings.slide_6 %}
+    <img src="{{ section.settings.slide_6 | image_url: width: 350 }}" alt="Slide 6" />
+  {% else %}
+    Slide 6
+  {% endif %}
+</div>
   </div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+
   <div class="swiper-pagination"></div>
 </div>
+<div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+{{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'swiper-init.js' | asset_url | script_tag }}
+
 
 {% schema %}
 {
   "name": "Swiper Gallery",
-  "settings": []
+  "settings": [
+     {
+    "type": "image_picker",
+    "id": "slide_1",
+    "label": "Slide 1 Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "slide_2",
+    "label": "Slide 2 Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "slide_3",
+    "label": "Slide 3 Image"
+  },
+      {
+    "type": "image_picker",
+    "id": "slide_4",
+    "label": "Slide 4 Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "slide_5",
+    "label": "Slide 5 Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "slide_6",
+    "label": "Slide 6 Image"
+  }
+  ],
+  "presets": [
+    {
+      "name": "Swiper Gallery"
+    }
+  ]
 }
 {% endschema %}

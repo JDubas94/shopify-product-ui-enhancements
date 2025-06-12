@@ -9,12 +9,24 @@
  */
 {
   "sections": {
+    "slider": {
+      "type": "swiper-gallery",
+      "settings": {
+        "slide_1": "shopify://shop_images/3.webp",
+        "slide_2": "shopify://shop_images/2.webp",
+        "slide_3": "shopify://shop_images/1.webp",
+        "slide_4": "shopify://shop_images/3.webp",
+        "slide_5": "shopify://shop_images/2.webp",
+        "slide_6": "shopify://shop_images/1.webp"
+      }
+    },
     "main": {
       "type": "hello-world",
       "settings": {}
     }
   },
   "order": [
+    "slider",
     "main"
   ]
 }
