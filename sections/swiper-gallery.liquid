@@ -1,5 +1,5 @@
 {% assign colors = "red,blue,green" | split: "," %}
-
+<div class="swiper-container-wrapper">
 <div class="swiper-container">
   <div class="swiper-wrapper">
     {% for i in (1..6) %}
@@ -19,6 +19,7 @@
   {% if section.settings.show_pagination %}
     <div class="swiper-pagination"></div>
   {% endif %}
+  </div>
 
   {% if section.settings.show_arrows %}
     <div class="swiper-button-prev"></div>
@@ -27,9 +28,9 @@
 </div>
 
 <div class="color-buttons">
-  <button class="color-btn" data-color="red">Red</button>
-  <button class="color-btn" data-color="blue">Blue</button>
-  <button class="color-btn" data-color="green">Green</button>
+  <button class="color-btn color-btn--red" data-color="red">Red</button>
+  <button class="color-btn color-btn--blue" data-color="blue">Blue</button>
+  <button class="color-btn color-btn--green" data-color="green">Green</button>
   <button id="clear-filter">All</button>
 </div>
 

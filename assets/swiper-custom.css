@@ -1,16 +1,20 @@
-
-.swiper-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden; 
+.swiper-container-wrapper{
   position: relative;
-  height: 450px;
 }
-
+ .swiper-container {
+  display: flex;
+  justify-content: center; 
+  max-width: 1000px;
+  width: 100%;
+  height: 450px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto; 
+}
 .swiper-wrapper {
   display: flex;
-}
+  width: 100%;
+} 
 
 .swiper-slide {
   flex-shrink: 0;
@@ -26,7 +30,6 @@
   border-radius: 8px;
 }
 
-/* ==== СТРІЛКИ ==== */
 .swiper-button-next,
 .swiper-button-prev {
   color: #000;
@@ -35,50 +38,72 @@
   top: 50%;
   transform: translateY(-50%);
   position: absolute;
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
+  z-index: 10 !important;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
 }
 
-.swiper-button-prev {
-  left: 10px;
-}
-
-.swiper-button-next {
-  right: 10px;
-}
 
 
-@media (max-width: 860px) {
-  .swiper{
-    max-width: 500px;
-  }
-  .swiper-button-next {
-  right: 10px;
-}
-
-}
-
-@media (max-width: 600px) {
-   .swiper{
-    max-width: 350px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    display: none;
+@media (max-width: 1200px) {
+  .swiper-container{
+    max-width: 75%;
   }
 }
+/* @media (max-width: 750px) {
+  .swiper-container{
+    max-width: 50%;
+  }
+} */
 
-.color-buttons { margin-top: 20px; text-align: center; }
+@media (max-width: 500px) {
+.swiper-container{
+  height: 350px;
+}
+.swiper-button-next, 
+.swiper-button-prev{
+  width: 20px;
+  height: 20px;
+}
+.color-buttons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.color-btn, #clear-filter{
+  padding: 10px;
+  margin: 10px;
+}
+}
+
+.color-buttons { 
+  margin-block: 20px;
+  text-align: center; 
+}
 .color-btn, #clear-filter {
   margin: 0 5px;
-  padding: 6px 12px;
+  padding: 6px 16px;
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
+  border-radius: 5px;
+  color: #000;
 }
-.color-btn.active { background: #000; color: #fff; }
+.color-btn.active { 
+  background: #000; 
+  color: #fff; 
+}
+.color-btn--red{
+  background-color: rgb(221, 12, 12);
+  color: #fff;
+}
+.color-btn--blue{
+  background-color: rgb(14, 14, 179);
+  color: #fff;
+}
+.color-btn--green{
+  background-color: green;
+  color: #fff;
+}
