@@ -1,99 +1,94 @@
+{% assign colors = "red,blue,green" | split: "," %}
 
-  <div class="swiper">
+<div class="swiper-container">
   <div class="swiper-wrapper">
-    <div class="swiper-slide">
-  {% if section.settings.slide_1 %}
-    <img src="{{ section.settings.slide_1 | image_url: width: 350 }}" alt="Slide 1" />
-  {% else %}
-    Slide 1
-  {% endif %}
-</div>
-   <div class="swiper-slide">
-  {% if section.settings.slide_2 %}
-    <img src="{{ section.settings.slide_2 | image_url: width: 350 }}" alt="Slide 2" />
-  {% else %}
-    Slide 2
-  {% endif %}
-</div>
-    <div class="swiper-slide">
-  {% if section.settings.slide_3 %}
-    <img src="{{ section.settings.slide_3 | image_url: width: 350 }}" alt="Slide 3" />
-  {% else %}
-    Slide 3
-  {% endif %}
-</div>
-      <div class="swiper-slide">
-  {% if section.settings.slide_4 %}
-    <img src="{{ section.settings.slide_4 | image_url: width: 350 }}" alt="Slide 4" />
-  {% else %}
-    Slide 4
-  {% endif %}
-</div>
-    <div class="swiper-slide">
-  {% if section.settings.slide_5 %}
-    <img src="{{ section.settings.slide_5 | image_url: width: 350 }}" alt="Slide 5" />
-  {% else %}
-    Slide 5
-  {% endif %}
-</div>
-   <div class="swiper-slide">
-  {% if section.settings.slide_6 %}
-    <img src="{{ section.settings.slide_6 | image_url: width: 350 }}" alt="Slide 6" />
-  {% else %}
-    Slide 6
-  {% endif %}
-</div>
+    {% for i in (1..6) %}
+      {% assign slide_key = 'slide_' | append: i %}
+      {% assign img = section.settings[slide_key] %}
+      {% assign color_key = 'slide_' | append: i | append: '_color' %}
+      {% assign color = section.settings[color_key] %}
+
+      <div class="swiper-slide" data-color="{{ color | downcase }}">
+        {% if img %}
+          <img src="{{ img | image_url: width: 600 }}" alt="Slide {{ i }}" />
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
 
-  <div class="swiper-pagination"></div>
+  {% if section.settings.show_pagination %}
+    <div class="swiper-pagination"></div>
+  {% endif %}
+
+  {% if section.settings.show_arrows %}
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  {% endif %}
 </div>
-<div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+
+<div class="color-buttons">
+  <button class="color-btn" data-color="red">Red</button>
+  <button class="color-btn" data-color="blue">Blue</button>
+  <button class="color-btn" data-color="green">Green</button>
+  <button id="clear-filter">All</button>
 </div>
+
+<script>
+  window.productHandle = "{{ product.handle }}";
+  window.swiperSettings = {
+    desktop: {
+      slidesPerView: {{ section.settings.desktop_slides_per_view }},
+      spaceBetween: {{ section.settings.desktop_space_between }}
+    },
+    tablet: {
+      slidesPerView: {{ section.settings.tablet_slides_per_view }},
+      spaceBetween: {{ section.settings.tablet_space_between }}
+    },
+    mobile: {
+      slidesPerView: {{ section.settings.mobile_slides_per_view }},
+      spaceBetween: {{ section.settings.mobile_space_between }}
+    },
+    arrows: {{ section.settings.show_arrows | json }},
+    pagination: {{ section.settings.show_pagination | json }}
+  };
+</script>
 
 {{ 'swiper.min.js' | asset_url | script_tag }}
 {{ 'swiper-init.js' | asset_url | script_tag }}
-
 
 {% schema %}
 {
   "name": "Swiper Gallery",
   "settings": [
-     {
-    "type": "image_picker",
-    "id": "slide_1",
-    "label": "Slide 1 Image"
-  },
-  {
-    "type": "image_picker",
-    "id": "slide_2",
-    "label": "Slide 2 Image"
-  },
-  {
-    "type": "image_picker",
-    "id": "slide_3",
-    "label": "Slide 3 Image"
-  },
-      {
-    "type": "image_picker",
-    "id": "slide_4",
-    "label": "Slide 4 Image"
-  },
-  {
-    "type": "image_picker",
-    "id": "slide_5",
-    "label": "Slide 5 Image"
-  },
-  {
-    "type": "image_picker",
-    "id": "slide_6",
-    "label": "Slide 6 Image"
-  }
+    { "type": "image_picker", "id": "slide_1", "label": "Slide 1 Image" },
+    { "type": "text", "id": "slide_1_color", "label": "Slide 1 Color" },
+    { "type": "image_picker", "id": "slide_2", "label": "Slide 2 Image" },
+    { "type": "text", "id": "slide_2_color", "label": "Slide 2 Color" },
+    { "type": "image_picker", "id": "slide_3", "label": "Slide 3 Image" },
+    { "type": "text", "id": "slide_3_color", "label": "Slide 3 Color" },
+    { "type": "image_picker", "id": "slide_4", "label": "Slide 4 Image" },
+    { "type": "text", "id": "slide_4_color", "label": "Slide 4 Color" },
+    { "type": "image_picker", "id": "slide_5", "label": "Slide 5 Image" },
+    { "type": "text", "id": "slide_5_color", "label": "Slide 5 Color" },
+    { "type": "image_picker", "id": "slide_6", "label": "Slide 6 Image" },
+    { "type": "text", "id": "slide_6_color", "label": "Slide 6 Color" },
+
+    { "type": "header", "content": "Налаштування для ПК" },
+    { "type": "range", "id": "desktop_slides_per_view", "label": "Слайдів на ПК", "min": 1, "max": 6, "default": 4 },
+    { "type": "range", "id": "desktop_space_between", "label": "Відступ між слайдами (ПК)", "min": 0, "max": 50, "default": 20 },
+
+    { "type": "header", "content": "Налаштування для планшетів" },
+    { "type": "range", "id": "tablet_slides_per_view", "label": "Слайдів на планшеті", "min": 1, "max": 4, "default": 2 },
+    { "type": "range", "id": "tablet_space_between", "label": "Відступ між слайдами (планшет)", "min": 0, "max": 40, "default": 15 },
+
+    { "type": "header", "content": "Налаштування для мобільних" },
+    { "type": "range", "id": "mobile_slides_per_view", "label": "Слайдів на мобільному", "min": 1, "max": 3, "default": 1 },
+    { "type": "range", "id": "mobile_space_between", "label": "Відступ між слайдами (мобільний)", "min": 0, "max": 30, "default": 10 },
+
+    { "type": "checkbox", "id": "show_arrows", "label": "Показувати стрілки навігації", "default": true },
+    { "type": "checkbox", "id": "show_pagination", "label": "Показувати пагінацію", "default": true }
   ],
-  "presets": [
-    {
-      "name": "Swiper Gallery"
-    }
-  ]
+  "presets": [ { "name": "Swiper Gallery" } ]
 }
 {% endschema %}
+
